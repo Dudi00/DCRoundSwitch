@@ -32,7 +32,8 @@
 @implementation DCRoundSwitch
 @synthesize outlineLayer, toggleLayer, knobLayer, clipLayer, ignoreTap;
 @synthesize on, onText, offText;
-@synthesize onTintColor;
+@synthesize onTintColor,offTintColor;
+@synthesize onStringColor,offStringColor;
 
 #pragma mark -
 #pragma mark Init & Memory Managment
@@ -413,6 +414,39 @@
 		[onTintColor release];
 		onTintColor = [anOnTintColor retain];
 		self.toggleLayer.onTintColor = anOnTintColor;
+		[self.toggleLayer setNeedsDisplay];
+	}
+}
+
+- (void)setOffTintColor:(UIColor *)anOffTintColor
+{
+	if (anOffTintColor != offTintColor)
+	{
+		[offTintColor release];
+		onTintColor = [anOffTintColor retain];
+		self.toggleLayer.offTintColor = anOffTintColor;
+		[self.toggleLayer setNeedsDisplay];
+	}
+}
+
+- (void)setOnStringColor:(UIColor *)anOnStringColor
+{
+	if (anOnStringColor != onStringColor)
+	{
+		[onStringColor release];
+		onStringColor = [anOnStringColor retain];
+		self.toggleLayer.onStringColor = anOnStringColor;
+		[self.toggleLayer setNeedsDisplay];
+	}
+}
+
+- (void)setOffStringColor:(UIColor *)anOffStringColor
+{
+	if (anOffStringColor != offStringColor)
+	{
+		[offStringColor release];
+		offStringColor = [anOffStringColor retain];
+		self.toggleLayer.offStringColor = anOffStringColor;
 		[self.toggleLayer setNeedsDisplay];
 	}
 }

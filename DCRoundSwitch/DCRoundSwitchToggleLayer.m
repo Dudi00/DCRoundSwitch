@@ -12,10 +12,11 @@
 #import "DCRoundSwitchToggleLayer.h"
 
 @implementation DCRoundSwitchToggleLayer
-@synthesize onString, offString, onTintColor;
+@synthesize onString, offString, onTintColor,offTintColor;
 @synthesize drawOnTint;
 @synthesize clip;
 @synthesize labelFont;
+@synthesize onStringColor,offStringColor;
 
 - (void)dealloc
 {
@@ -33,6 +34,9 @@
 		self.onString = anOnString;
 		self.offString = anOffString;
 		self.onTintColor = anOnTintColor;
+        self.offTintColor = [UIColor colorWithWhite:0.963 alpha:1.0];
+        self.onStringColor = [UIColor whiteColor];
+        self.offStringColor = [UIColor colorWithWhite:0.52 alpha:1.0];
 	}
 
 	return self;
@@ -64,7 +68,7 @@
 	}
 
 	// off tint color (white)
-	CGContextSetFillColorWithColor(context, [UIColor colorWithWhite:0.963 alpha:1.0].CGColor);
+	CGContextSetFillColorWithColor(context, self.offTintColor.CGColor);
 	CGContextFillRect(context, CGRectMake(knobCenter, 0, self.bounds.size.width - knobCenter, self.bounds.size.height));
 
 	// knob shadow
@@ -85,7 +89,7 @@
 	CGPoint onTextPoint = CGPointMake((textSpaceWidth - onTextSize.width) / 2.0 + knobRadius * .15, floorf((self.bounds.size.height - onTextSize.height) / 2.0) + 1.0);
 	[[UIColor colorWithWhite:0.45 alpha:1.0] set]; // .2 & .4
 	[self.onString drawAtPoint:CGPointMake(onTextPoint.x, onTextPoint.y - 1.0) withFont:self.labelFont];
-	[[UIColor whiteColor] set];
+	[onStringColor set];
 	[self.onString drawAtPoint:onTextPoint withFont:self.labelFont];
 
 	// 'OFF' state label (self.offString)
@@ -93,7 +97,11 @@
 	CGPoint offTextPoint = CGPointMake(textSpaceWidth + (textSpaceWidth - offTextSize.width) / 2.0 + knobRadius * .86, floorf((self.bounds.size.height - offTextSize.height) / 2.0) + 1.0);
 	[[UIColor whiteColor] set];
 	[self.offString drawAtPoint:CGPointMake(offTextPoint.x, offTextPoint.y + 1.0) withFont:self.labelFont];
-	[[UIColor colorWithWhite:0.52 alpha:1.0] set];
+    
+    [offStringColor set];
+    
+        
+
 	[self.offString drawAtPoint:offTextPoint withFont:self.labelFont];
 
 	UIGraphicsPopContext();
